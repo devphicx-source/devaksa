@@ -26,12 +26,12 @@
                 <a href="#contact">Contact</a>
             </div>
             <div class="nav-icons">
+                <a href="cart.html" class="nav-icon-link" style="position: relative;"><i
+                        class="fa-solid fa-bag-shopping"></i><span class="cart-dot"></span></a>
                 <a href="login.html" id="login-btn" class="nav-icon-link" title="Login / Sign Up"><i
                         class="fa-regular fa-user"></i></a>
                 <a href="#" id="logout-btn" class="nav-icon-link" title="Logout" style="display: none;"
                     onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
-                <a href="#" class="nav-icon-link" style="position: relative;"><i
-                        class="fa-solid fa-bag-shopping"></i><span class="cart-dot"></span></a>
                 <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <i class="fa-solid fa-bars"></i>
                 </div>
@@ -61,8 +61,7 @@
             <!-- Product 1 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
-                    <div class="wishlist-icon"><i class="fa-solid fa-heart"></i></div>
+                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-cake.jpeg" alt="Cow Dung Cake">
                 </div>
                 <div class="product-info">
@@ -77,10 +76,10 @@
                             <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
                         </div>
 
-                        <button class="btn-main" onclick="openEnquiry(' Raw Forest Honey')">Buy Now</button>
+                        <button class="btn-main" onclick="openEnquiry('Cow dung cake')">Buy Now</button>
 
                         <div class="button-row">
-                            <button class="btn-secondary" title="Add to Cart">
+                            <button class="btn-secondary" onclick="addToCart('Cow dung cake')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                             <button class="btn-view" title="View Details">
@@ -95,8 +94,7 @@
             <!-- Product 2 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
-                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-manure.jpeg" alt="Cow Dung Manure">
                 </div>
                 <div class="product-info">
@@ -111,10 +109,10 @@
                             <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
                         </div>
 
-                        <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
+                        <button class="btn-main" onclick="openEnquiry('Cow dung manure')">Buy Now</button>
 
                         <div class="button-row">
-                            <button class="btn-secondary" title="Add to Cart">
+                            <button class="btn-secondary" onclick="addToCart('Cow dung manure')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                             <button class="btn-view" title="View Details">
@@ -129,8 +127,7 @@
             <!-- Product 3 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
-                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
                     <img src="natural-pure-raw-honey-.jpeg" alt="Raw Honey">
                 </div>
                 <div class="product-info">
@@ -148,7 +145,7 @@
                         <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
 
                         <div class="button-row">
-                            <button class="btn-secondary" title="Add to Cart">
+                            <button class="btn-secondary" onclick="addToCart('Raw Forest Honey')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                             <button class="btn-view" title="View Details">
@@ -163,14 +160,13 @@
             <!-- Product 4 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
-                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-powder.jpeg" alt="Moringa Powder">
                 </div>
                 <div class="product-info">
                     <span class="badge">Pure</span>
-                    <h3>Raw Forest Honey</h3>
-                    <p class="product-description">100% pure, unprocessed honey from deep forests.</p>
+                    <h3>Cow dung powder</h3>
+                    <p class="product-description">100% pure, unprocessed cow dung powder.</p>
 
                     <div class="product-bottom">
                         <div class="price-box"
@@ -179,10 +175,10 @@
                             <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
                         </div>
 
-                        <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
+                        <button class="btn-main" onclick="openEnquiry('Cow dung powder')">Buy Now</button>
 
                         <div class="button-row">
-                            <button class="btn-secondary" title="Add to Cart">
+                            <button class="btn-secondary" onclick="addToCart('Cow dung powder')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                             <button class="btn-view" title="View Details">
@@ -369,6 +365,22 @@
     </div>
 
 
+
+
+    <!-- Custom Confirmation Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-content" style="max-width: 400px; padding: 30px;">
+            <div class="confirm-icon" style="font-size: 40px; color: var(--sage-green); margin-bottom: 20px;">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <h3 id="confirm-message" style="margin-bottom: 25px; color: #333; font-size: 18px; line-height: 1.5;">Are
+                you sure?</h3>
+            <div class="button-row" style="justify-content: center; gap: 15px;">
+                <button class="btn-secondary" onclick="closeConfirmModal()" style="min-width: 100px;">Cancel</button>
+                <button class="btn-main" id="confirm-yes-btn" style="min-width: 100px;">Yes</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

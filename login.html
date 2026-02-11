@@ -244,16 +244,16 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert("Login Successful! Redirecting...");
+                    showSuccessModal("Logged in successfully, redirecting...");
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     window.location.href = "index.html";
                 } else {
-                    alert(data.message || "Login failed");
+                    showSuccessModal("Login failed");
                 }
             } catch (error) {
                 console.error("Error:", error);
-                alert("Server error");
+                showSuccessModal("Server error");
             }
         }
 
@@ -273,15 +273,41 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert("Account Created! Please Log In.");
+
+                    showSuccessModal("Account Created! Please Log In.");
+
                     showLogin();
                 } else {
-                    alert(data.message || "Signup failed");
+                        showSuccessModal(data.message || "Signup failed");
                 }
             } catch (error) {
                 console.error("Error:", error);
-                alert("Server error");
+                showSuccessModal("Server error");
             }
+        }
+
+        // Custom Toast Notification Logic
+        function showSuccessModal(message) {
+            // Create toast element dynamically
+            let toast = document.querySelector('.toast-notification');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span></span>';
+                document.body.appendChild(toast);
+            }
+
+            toast.querySelector('span').textContent = message;
+
+            // Show toast
+            requestAnimationFrame(() => {
+                toast.classList.add('active');
+            });
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
         }
     </script>
 

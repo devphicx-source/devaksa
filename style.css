@@ -146,6 +146,19 @@ img {
     transform: scale(1.02);
 }
 
+#logout-btn i {
+    color: #d32f2f;
+    /* Red color for logout */
+    font-size: 18px;
+    /* Ensure visibility */
+    transition: color 0.3s ease;
+}
+
+#logout-btn:hover i {
+    color: #b71c1c;
+    /* Darker red on hover */
+}
+
 .nav-icons {
     display: flex;
     align-items: center;
@@ -298,7 +311,8 @@ img {
 
 /* Image Area */
 .product-img-wrapper {
-    height: 240px;
+    height: 280px;
+    /* Increased height */
     width: 100%;
     position: relative;
     /* Crucial for absolute icons */
@@ -312,8 +326,9 @@ img {
 }
 
 .product-card img {
-    max-height: 90%;
-    max-width: 90%;
+    max-height: calc(100% + 20px);
+    /* Made image bigger */
+    max-width: calc(100% + 20px);
     object-fit: contain;
     transition: transform 0.5s ease;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.05));
@@ -327,22 +342,32 @@ img {
 .brand-logo,
 .wishlist-icon {
     position: absolute;
-    top: 12px;
-    width: 34px;
-    height: 34px;
-    background: rgba(255, 255, 255, 0.9);
+    top: 15px;
+    /* Moved slightly down */
+    left: 15px;
+    /* Moved slightly right */
+    width: 40px;
+    /* Slightly larger */
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 2;
     font-size: 14px;
     color: var(--text-primary);
 }
 
+.brand-logo img {
+    width: 24px;
+    height: auto;
+    object-fit: contain;
+}
+
 .brand-logo {
-    left: 12px;
+    left: 15px;
     color: var(--sage-green);
 }
 
@@ -714,9 +739,17 @@ img {
         color: var(--text-primary);
     }
 
+    .nav-icons {
+        margin-left: auto;
+        /* Pushes icons to the right */
+        margin-right: 20px;
+        /* Space between icons and hamburger */
+    }
+
     .mobile-menu-btn {
         display: block;
-        font-size: 22px;
+        font-size: 24px;
+        color: #2D3E2F;
     }
 
     /* Hero Section Mobile */
@@ -804,6 +837,39 @@ img {
 
 .modal-overlay.active {
     opacity: 1;
+}
+
+/* Toast Notification Style */
+.toast-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 3000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.toast-notification.active {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast-notification i {
+    color: #4CAF50;
+    /* Green check */
+    font-size: 16px;
 }
 
 .modal-content {

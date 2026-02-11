@@ -5,6 +5,12 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    cart: [{
+        productName: String,
+        price: Number,
+        image: String,
+        quantity: { type: Number, default: 1 }
+    }],
     createdAt: { type: Date, default: Date.now }
 });
 

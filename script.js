@@ -3,78 +3,82 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Devaksa Experience Loaded");
 
-    // Check Auth State
-    const token = localStorage.getItem('token');
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
 
-    if (token) {
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = 'flex';
-    } else {
-        if (loginBtn) loginBtn.style.display = 'flex';
-        if (logoutBtn) logoutBtn.style.display = 'none';
-    }
+    // Check Auth State
+    checkAuthState();
 
     // Smooth Scrolling for Navigation Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+        // ... (rest of code)
+    });
 
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                // Close mobile menu if open
-                const navLinks = document.querySelector('.nav-links');
-                const menuIcon = document.querySelector('.mobile-menu-btn i');
+    // Check Auth State
+    checkAuthState();
 
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    menuIcon.classList.remove('fa-xmark');
-                    menuIcon.classList.add('fa-bars');
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const navLinks = document.querySelector('.nav-links');
+                    const menuIcon = document.querySelector('.mobile-menu-btn i');
+
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuIcon.classList.remove('fa-xmark');
+                        menuIcon.classList.add('fa-bars');
+                    }
+
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
+            });
+        });
 
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        // Navbar Scroll Effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.style.background = "rgba(251, 251, 253, 0.85)";
+                navbar.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
+            } else {
+                navbar.style.background = "rgba(251, 251, 253, 0.72)";
+                navbar.style.borderBottom = "1px solid rgba(0,0,0,0.0)";
             }
         });
-    });
 
-    // Navbar Scroll Effect
-    const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            navbar.style.background = "rgba(251, 251, 253, 0.85)";
-            navbar.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
-        } else {
-            navbar.style.background = "rgba(251, 251, 253, 0.72)";
-            navbar.style.borderBottom = "1px solid rgba(0,0,0,0.0)";
-        }
-    });
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-    // Intersection Observer for Fade-in Animations
-    const observerOptions = {
-        threshold: 0.1
-    };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-            }
+        // Apply animation to product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(30px)";
+            card.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+            observer.observe(card);
         });
-    }, observerOptions);
-
-    // Apply animation to product cards
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
-        card.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
-        observer.observe(card);
     });
 });
 
@@ -94,50 +98,131 @@ function toggleMobileMenu() {
     }
 }
 
+// Custom Confirmation Logic
+let performConfirmAction = null;
+
+function showConfirmModal(message, actionCallback) {
+    const modal = document.getElementById('confirm-modal');
+    const messageEl = document.getElementById('confirm-message');
+    const confirmBtn = document.getElementById('confirm-yes-btn');
+
+    messageEl.textContent = message;
+    performConfirmAction = actionCallback;
+
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+
+    // Remove old listener to prevent stacking
+    const newBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+
+    newBtn.addEventListener('click', () => {
+        if (performConfirmAction) performConfirmAction();
+        closeConfirmModal();
+    });
+}
+
+// Custom Success/Alert Modal Logic
+// Custom Toast Notification Logic
+function showSuccessModal(message) {
+    // Create toast element dynamically
+    let toast = document.querySelector('.toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span></span>';
+        document.body.appendChild(toast);
+    }
+
+    toast.querySelector('span').textContent = message;
+
+    // Show toast
+    requestAnimationFrame(() => {
+        toast.classList.add('active');
+    });
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 3000);
+}
+
+// Reuse closeConfirmModal for both
+function closeConfirmModal() {
+    const modal = document.getElementById('confirm-modal');
+    const cancelBtn = modal.querySelector('.btn-secondary');
+    const confirmBtn = document.getElementById('confirm-yes-btn');
+
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        // Reset state in case it was used as an alert
+        if (cancelBtn) cancelBtn.style.display = 'inline-block';
+        if (confirmBtn) confirmBtn.textContent = "Yes";
+    }, 300);
+}
+
+// Close confirm modal on outside click
+const confirmModal = document.getElementById('confirm-modal');
+if (confirmModal) {
+    confirmModal.addEventListener('click', function (e) {
+        if (e.target === this) closeConfirmModal();
+    });
+}
+
 // Mock Enquiry Logic / Buy Now
 function openEnquiry(productName) {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        if (confirm("You must be logged in to purchase products.\n\nGo to Login Page?")) {
+        showConfirmModal("You must be logged in to purchase products.\nGo to Login Page?", () => {
             window.location.href = "login.html";
-        }
+        });
         return;
     }
 
-    const message = `Interested in ${productName}?\n\nOur team will contact you shortly about pricing and delivery.`;
-    if (confirm(message + "\n\nClick OK to go to the Enquiry Form.")) {
-        // Pre-fill the enquiry modal if possible, or just open it
-        // For now, let's open the modal we made
+    const message = `Interested in ${productName}?\nOur team will contact you shortly. Proceed to Enquiry?`;
+    showConfirmModal(message, () => {
         const modal = document.getElementById('enquiry-modal');
         if (modal) {
-            // Pre-fill product name
             const productInput = modal.querySelector('input[placeholder*="Product Name"]');
-            if (productInput) productInput.value = productName;
+            if (productInput) productInput.value = productName.trim();
             openEnquiryModal();
         } else {
-            window.location.href = "sendEnq.html"; // Fallback if modal missing
+            window.location.href = "sendEnq.html";
         }
-    }
+    });
 }
 
-// Review Modal Logic
 // Review Modal Logic
 function openReviewModal() {
     const token = localStorage.getItem('token');
     if (!token) {
-        if (confirm("You must be logged in to write a review.\n\nGo to Login Page?")) {
+        showConfirmModal("You must be logged in to write a review.\nGo to Login Page?", () => {
             window.location.href = "login.html";
-        }
+        });
         return;
     }
 
     const modal = document.getElementById('review-modal');
     modal.style.display = 'flex';
-    // Small delay to allow display:flex to apply before adding active class for transition
     setTimeout(() => {
         modal.classList.add('active');
     }, 10);
+}
+
+// Logout Function
+function logout() {
+    showConfirmModal("Are you sure you want to logout?", () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        showSuccessModal("Logged out successfully.");
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    });
 }
 
 function closeReviewModal() {
@@ -271,9 +356,73 @@ async function submitEnquiry(e) {
     }
 }
 
-// Logout Function
-function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.reload();
+// Add to Cart Logic
+async function addToCart(productName) {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showConfirmModal("You must be logged in to add items to cart.\nGo to Login Page?", () => {
+            window.location.href = "login.html";
+        });
+        return;
+    }
+
+    try {
+        // Map product names to images (hardcoded for now, ideally from DB)
+        const productImages = {
+            'Cow dung cake': 'cow-dung-cake.jpeg',
+            'Cow dung manure': 'cow-dung-manure.jpeg',
+            'Raw Forest Honey': 'natural-pure-raw-honey-.jpeg',
+            'Cow dung powder': 'cow-dung-powder.jpeg'
+        };
+
+        const response = await fetch('/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                productName,
+                price: 499, // Hardcoded for now as per index.html
+                image: productImages[productName] || 'devaaks-logo.png'
+            })
+        });
+
+        if (response.ok) {
+            const cartDot = document.querySelector('.cart-dot');
+            if (cartDot) {
+                cartDot.style.display = 'block';
+                cartDot.classList.add('pulse');
+                setTimeout(() => cartDot.classList.remove('pulse'), 500);
+            }
+            showSuccessModal(`${productName} added to cart!`);
+        } else {
+            console.error('Failed response:', await response.text());
+            showSuccessModal("Failed to add item to cart. Make sure server is running.");
+        }
+    } catch (error) {
+        console.error("Cart Error:", error);
+        showSuccessModal("Something went wrong. Check console.");
+    }
+}
+
+
+
+// Global Auth Functions
+function checkAuthState() {
+    const token = localStorage.getItem('token');
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // Only try to toggle if elements exist (avoids errors on pages without these IDs)
+    if (loginBtn && logoutBtn) {
+        if (token) {
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'flex';
+        } else {
+            loginBtn.style.display = 'flex';
+            logoutBtn.style.display = 'none';
+        }
+    }
 }

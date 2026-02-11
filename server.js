@@ -91,6 +91,71 @@ app.post('/api/enquiries', async (req, res) => {
     }
 });
 
+// 4. CART ROUTES
+// Middleware to authenticate token
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.JWT_SECRET || 'secret', (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
+
+app.get('/api/cart', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user.cart);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching cart' });
+    }
+});
+
+app.post('/api/cart', authenticateToken, async (req, res) => {
+    try {
+        console.log("Adding to cart:", req.body);
+        const { productName, price, image } = req.body;
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Initialize cart if it doesn't exist
+        if (!user.cart) {
+            user.cart = [];
+        }
+
+        const existingItem = user.cart.find(item => item.productName === productName);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            user.cart.push({ productName, price, image, quantity: 1 });
+        }
+
+        await user.save();
+        console.log("Cart updated:", user.cart);
+        res.status(200).json({ message: 'Item added to cart', cart: user.cart });
+    } catch (error) {
+        console.error("Cart Error:", error);
+        res.status(500).json({ message: 'Error adding to cart', error: error.message });
+    }
+});
+
+app.delete('/api/cart/:productName', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        user.cart = user.cart.filter(item => item.productName !== req.params.productName);
+        await user.save();
+        res.json({ message: 'Item removed', cart: user.cart });
+    } catch (error) {
+        res.status(500).json({ message: 'Error removing item' });
+    }
+});
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
