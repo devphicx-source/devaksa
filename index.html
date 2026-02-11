@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce WEBSITE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+    <header>
+        <div class="navbar">
+            <div class="nav-logo border">
+                <div class="logo">
+                    <img src="header.jpeg" alt="">
+                </div>
+            </div>
+            <div class="nav-address border">
+                <p class="add-first">Deliver to</p>
+                <div class="add-icon">
+                    <i class="fa-sharp fa-solid fa-location-dot"></i>
+                    <p class="add-second">India</p>
+                </div>
+            </div>
+            <div class="nav-search">
+               <select class="search-select">
+                <option>All</option>
+                <input placeholder="search-products" class="search-input">
+                <div class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+               </select>
+            </div>
+            <div class="nav-signin border">
+                <p><span>Hello, sign in</span></p>
+                <p class="nav-second">Account & Lists</p>
+            </div>
+
+            <div class="nav-signin border">
+                <p><span>Returns</span></p>
+                <p class="nav-second">& Orders</p>
+            </div>
+
+
+            <div class="nav-cart border">
+                <i class="fa-sharp-duotone fa-solid fa-cart-shopping"></i>
+                cart
+            </div>
+        </div>
+            
+        
+       <div class="panel">
+        <a href="#">About Us</a>
+        <a href="#">Our Product</a>
+        <a href="#">Contact Us</a>
+      <a href="#">Send Enquiry</a>
+        
+
+        
+        
+        
+
+    </header>
+    <div class="hero-section">
+    </div>
+
+
+    <h2 class="section-title">Our Product Range</h2>
+
+<div class="product-list">
+
+  <div class="product-card">
+
+    <img src="cow-dung-cake.jpeg" class="zoom-img" onclick="openZoom(this)">
+
+    <div class="product-info">
+
+      <h3>Cow Dung Cake</h3>
+      <p class="price">Price On Request</p>
+
+      <!-- DETAILS -->
+      <div class="product-details">
+        <p><b>MOQ :</b> 5 Ton</p>
+        <p><b>Material :</b> Cow Dung Cake</p>
+        <p><b>Packaging Type :</b> Plastic Bag</p>
+        
+      </div>
+
+      <div class="btn-group">
+        <button class="price-btn">Get Latest Price</button>
+        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="product-list">
+
+  <div class="product-card">
+
+    <img src="cow-dung-manure.jpeg" alt="cow-dung-manure">
+
+    <div class="product-info">
+
+      <h3>Cow Dung Manure</h3>
+      <p class="price">Price On Request</p>
+
+      <!-- DETAILS -->
+      <div class="product-details">
+        <p><b>MOQ :</b> 5 Ton</p>
+        <p><b>Material :</b>Cow Dung Manure </p>
+        <p><b>Packaging Type :</b> Plastic Bag</p>
+        
+      </div>
+
+      <div class="btn-group">
+        <button class="price-btn">Get Latest Price</button>
+        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="product-list">
+
+  <div class="product-card">
+
+    <img src="natural-pure-raw-honey-.jpeg" alt="natural-pure-raw-honey">
+
+    <div class="product-info">
+
+      <h3>Raw Forest Honey</h3>
+      <p class="price">Price On Request</p>
+
+      <!-- DETAILS -->
+      <div class="product-details">
+        <p><b>MOQ :</b> 5 Ton</p>
+        <p><b>Material :</b>Raw Forest Honey</p>
+        <p><b>Packaging Type :</b> Plastic Bag</p>
+
+      </div>
+
+      <div class="btn-group">
+        <button class="price-btn">Get Latest Price</button>
+        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="product-list">
+
+  <div class="product-card">
+
+    <img src="cow-dung-powder.jpeg" alt="cow-dung-powder">
+
+    <div class="product-info">
+
+      <h3>Moringa Powder</h3>
+      <p class="price">Price On Request</p>
+
+      <!-- DETAILS -->
+      <div class="product-details">
+        <p><b>MOQ :</b> 5 Ton</p>
+        <p><b>Material :</b>Moringa Powder </p>
+        <p><b>Packaging Type :</b> Plastic Bag</p>
+        
+      </div>
+
+      <div class="btn-group">
+        <button class="price-btn">Get Latest Price</button>
+        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+      
+
+<section class="review-wrapper">
+
+  <h2 class="review-title">Ratings & Reviews</h2>
+
+  <div class="review-box">
+    <p class="review-text">your thoughts with other customers<br>
+      <br>
+    for Devaksa Green Solutions</p>
+
+    <a href="review.html" class="review-btn">Add Review</a>
+  </div>
+
+</section>
+
+
+
+<div id="reviewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
+
+  <div style="background:white; width:300px; margin:10% auto; padding:20px; text-align:center;">
+    
+    <h3>Write Review</h3>
+
+    <textarea rows="4" style="width:100%;"></textarea>
+
+    <br><br>
+
+    <button onclick="closeReview()">Close</button>
+
+  </div>
+
+</div>
+
+
+    <footer>
+        <div class="foot-panel1">
+            Back to top</div>
+            <div class="foot-panel2">
+                <ul>
+                    <p>Get to Know Us</p>
+                      <a>About Amazon</a>
+                      <a>Careers</a>
+                      <a>Press Releases</a>
+                      <a>Amazon Science</a>
+
+                </ul>
+
+                <ul>
+                    <p>Get to Know Us</p>
+                      <a>About Amazon</a>
+                      <a>Careers</a>
+                      <a>Press Releases</a>
+                      <a>Amazon Science</a>
+
+                </ul>
+                <ul>
+                    <p>Get to Know Us</p>
+                      <a>About Amazon</a>
+                      <a>Careers</a>
+                      <a>Press Releases</a>
+                      <a>Amazon Science</a>
+
+                </ul>
+
+                <ul>
+                    <p>Get to Know Us</p>
+                      <a>About Amazon</a>
+                      <a>Careers</a>
+                      <a>Press Releases</a>
+                      <a>Amazon Science</a>
+
+                </ul>
+            </div>
+            <div class="foot-panel3">
+                
+            </div>
+    </footer>
+    <div id="zoomBox" onclick="closeZoom()">
+        <img id="zoomImage">
+    </div>
+</body>
+</html>
