@@ -951,6 +951,26 @@ img {
     transition: transform 0.2s;
 }
 
+
 .star-rating i:hover {
     transform: scale(1.2);
+}
+
+/* Developer Credit Shine Animation */
+.developer-credit {
+    font-weight: 600;
+    background: linear-gradient(to right, #a1a1a6 0%, #fff 50%, #a1a1a6 100%);
+    background-size: 200% auto;
+    color: #a1a1a6;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
 }

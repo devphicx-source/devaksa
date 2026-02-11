@@ -199,18 +199,18 @@
             const container = document.getElementById('cart-items-container');
 
             try {
-                console.log("Fetching cart for token:", token);
+                // console.log("Fetching cart for token:", token);
                 const response = await fetch('/api/cart', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                console.log("Fetch response status:", response.status);
+                // console.log("Fetch response status:", response.status);
 
                 if (response.ok) {
                     const cartItems = await response.json();
-                    console.log("Cart items fetched:", cartItems);
+                    // console.log("Cart items fetched:", cartItems);
 
                     if (cartItems.length === 0) {
-                        console.log("Cart is empty.");
+                        // console.log("Cart is empty.");
                         container.innerHTML = `
                             <div class="empty-state">
                                 <i class="fa-solid fa-basket-shopping" style="font-size: 40px; margin-bottom: 20px; color: #ccc;"></i>
@@ -219,7 +219,7 @@
                             </div>
                         `;
                     } else {
-                        console.log("Rendering items...");
+                        // console.log("Rendering items...");
                         container.innerHTML = cartItems.map(item => `
                             <div class="cart-item">
                                 <img src="${item.image || 'devaaks-logo.png'}" alt="${item.productName}" class="cart-img" onerror="this.src='devaaks-logo.png'">
