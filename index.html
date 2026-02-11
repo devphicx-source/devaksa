@@ -1,271 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce WEBSITE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Devaksa Green Solutions | Organic & Pure</title>
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    
-    <header>
-        <div class="navbar">
-            <div class="nav-logo border">
-                <div class="logo">
-                    <img src="header.jpeg" alt="">
-                </div>
-            </div>
-            <div class="nav-address border">
-                <p class="add-first">Deliver to</p>
-                <div class="add-icon">
-                    <i class="fa-sharp fa-solid fa-location-dot"></i>
-                    <p class="add-second">India</p>
-                </div>
-            </div>
-            <div class="nav-search">
-               <select class="search-select">
-                <option>All</option>
-                <input placeholder="search-products" class="search-input">
-                <div class="search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-               </select>
-            </div>
-            <div class="nav-signin border">
-                <p><span>Hello, sign in</span></p>
-                <p class="nav-second">Account & Lists</p>
-            </div>
 
-            <div class="nav-signin border">
-                <p><span>Returns</span></p>
-                <p class="nav-second">& Orders</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="devaaks-logo.png" alt="Devaksa Logo" class="logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="#products">Products</a>
+                <a href="#about">Our Story</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
             </div>
-
-
-            <div class="nav-cart border">
-                <i class="fa-sharp-duotone fa-solid fa-cart-shopping"></i>
-                cart
+            <div class="nav-icons">
+                <a href="login.html" id="login-btn" class="nav-icon-link" title="Login / Sign Up"><i
+                        class="fa-regular fa-user"></i></a>
+                <a href="#" id="logout-btn" class="nav-icon-link" title="Logout" style="display: none;"
+                    onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
+                <a href="#" class="nav-icon-link" style="position: relative;"><i
+                        class="fa-solid fa-bag-shopping"></i><span class="cart-dot"></span></a>
+                <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
         </div>
-            
-        
-       <div class="panel">
-        <a href="#">About Us</a>
-        <a href="#">Our Product</a>
-        <a href="#">Contact Us</a>
-      <a href="#">Send Enquiry</a>
-        
+    </nav>
 
-        
-        
-        
-
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Nature, Pure & Simple.</h1>
+            <p class="hero-subtitle">Premium organic products for a sustainable lifestyle. From Cow Dung Cakes to Raw
+                Forest Honey.</p>
+            <div class="hero-cta-group">
+                <a href="#products" class="btn btn-primary">Shop Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
     </header>
-    <div class="hero-section">
-    </div>
 
+    <!-- Product Grid -->
+    <section id="products" class="product-section">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="product-grid">
 
-    <h2 class="section-title">Our Product Range</h2>
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="wishlist-icon"><i class="fa-solid fa-heart"></i></div>
+                    <img src="cow-dung-cake.jpeg" alt="Cow Dung Cake">
+                </div>
+                <div class="product-info">
+                    <span class="badge">Pure</span>
+                    <h3>Cow dung cake</h3>
+                    <p class="product-description">100% pure, unprocessed cow dung cakes.</p>
 
-<div class="product-list">
+                    <div class="product-bottom">
+                        <div class="price-box"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; color: #888;">Price on request</span>
+                            <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
+                        </div>
 
-  <div class="product-card">
+                        <button class="btn-main" onclick="openEnquiry(' Raw Forest Honey')">Buy Now</button>
 
-    <img src="cow-dung-cake.jpeg" class="zoom-img" onclick="openZoom(this)">
-
-    <div class="product-info">
-
-      <h3>Cow Dung Cake</h3>
-      <p class="price">Price On Request</p>
-
-      <!-- DETAILS -->
-      <div class="product-details">
-        <p><b>MOQ :</b> 5 Ton</p>
-        <p><b>Material :</b> Cow Dung Cake</p>
-        <p><b>Packaging Type :</b> Plastic Bag</p>
-        
-      </div>
-
-      <div class="btn-group">
-        <button class="price-btn">Get Latest Price</button>
-        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="product-list">
-
-  <div class="product-card">
-
-    <img src="cow-dung-manure.jpeg" alt="cow-dung-manure">
-
-    <div class="product-info">
-
-      <h3>Cow Dung Manure</h3>
-      <p class="price">Price On Request</p>
-
-      <!-- DETAILS -->
-      <div class="product-details">
-        <p><b>MOQ :</b> 5 Ton</p>
-        <p><b>Material :</b>Cow Dung Manure </p>
-        <p><b>Packaging Type :</b> Plastic Bag</p>
-        
-      </div>
-
-      <div class="btn-group">
-        <button class="price-btn">Get Latest Price</button>
-        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="product-list">
-
-  <div class="product-card">
-
-    <img src="natural-pure-raw-honey-.jpeg" alt="natural-pure-raw-honey">
-
-    <div class="product-info">
-
-      <h3>Raw Forest Honey</h3>
-      <p class="price">Price On Request</p>
-
-      <!-- DETAILS -->
-      <div class="product-details">
-        <p><b>MOQ :</b> 5 Ton</p>
-        <p><b>Material :</b>Raw Forest Honey</p>
-        <p><b>Packaging Type :</b> Plastic Bag</p>
-
-      </div>
-
-      <div class="btn-group">
-        <button class="price-btn">Get Latest Price</button>
-        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="product-list">
-
-  <div class="product-card">
-
-    <img src="cow-dung-powder.jpeg" alt="cow-dung-powder">
-
-    <div class="product-info">
-
-      <h3>Moringa Powder</h3>
-      <p class="price">Price On Request</p>
-
-      <!-- DETAILS -->
-      <div class="product-details">
-        <p><b>MOQ :</b> 5 Ton</p>
-        <p><b>Material :</b>Moringa Powder </p>
-        <p><b>Packaging Type :</b> Plastic Bag</p>
-        
-      </div>
-
-      <div class="btn-group">
-        <button class="price-btn">Get Latest Price</button>
-        <button class="detail-btn" onclick="toggleDetails(this)">View Details</button>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-
-      
-
-<section class="review-wrapper">
-
-  <h2 class="review-title">Ratings & Reviews</h2>
-
-  <div class="review-box">
-    <p class="review-text">your thoughts with other customers<br>
-      <br>
-    for Devaksa Green Solutions</p>
-
-    <a href="review.html" class="review-btn">Add Review</a>
-  </div>
-
-</section>
-
-
-
-<div id="reviewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
-
-  <div style="background:white; width:300px; margin:10% auto; padding:20px; text-align:center;">
-    
-    <h3>Write Review</h3>
-
-    <textarea rows="4" style="width:100%;"></textarea>
-
-    <br><br>
-
-    <button onclick="closeReview()">Close</button>
-
-  </div>
-
-</div>
-
-
-    <footer>
-        <div class="foot-panel1">
-            Back to top</div>
-            <div class="foot-panel2">
-                <ul>
-                    <p>Get to Know Us</p>
-                      <a>About Amazon</a>
-                      <a>Careers</a>
-                      <a>Press Releases</a>
-                      <a>Amazon Science</a>
-
-                </ul>
-
-                <ul>
-                    <p>Get to Know Us</p>
-                      <a>About Amazon</a>
-                      <a>Careers</a>
-                      <a>Press Releases</a>
-                      <a>Amazon Science</a>
-
-                </ul>
-                <ul>
-                    <p>Get to Know Us</p>
-                      <a>About Amazon</a>
-                      <a>Careers</a>
-                      <a>Press Releases</a>
-                      <a>Amazon Science</a>
-
-                </ul>
-
-                <ul>
-                    <p>Get to Know Us</p>
-                      <a>About Amazon</a>
-                      <a>Careers</a>
-                      <a>Press Releases</a>
-                      <a>Amazon Science</a>
-
-                </ul>
+                        <div class="button-row">
+                            <button class="btn-secondary" title="Add to Cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </button>
+                            <button class="btn-view" title="View Details">
+                                View Details <i class="fa-solid fa-arrow-up-right-from-square"
+                                    style="font-size: 11px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="foot-panel3">
-                
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <img src="cow-dung-manure.jpeg" alt="Cow Dung Manure">
+                </div>
+                <div class="product-info">
+                    <span class="badge">Pure</span>
+                    <h3>Cow dung manure</h3>
+                    <p class="product-description">100% pure, unprocessed cow dung manure.</p>
+
+                    <div class="product-bottom">
+                        <div class="price-box"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; color: #888;">Price on request</span>
+                            <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
+                        </div>
+
+                        <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
+
+                        <div class="button-row">
+                            <button class="btn-secondary" title="Add to Cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </button>
+                            <button class="btn-view" title="View Details">
+                                View Details <i class="fa-solid fa-arrow-up-right-from-square"
+                                    style="font-size: 11px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <img src="natural-pure-raw-honey-.jpeg" alt="Raw Honey">
+                </div>
+                <div class="product-info">
+                    <span class="badge">Pure</span>
+                    <h3>Raw Forest Honey</h3>
+                    <p class="product-description">100% pure, unprocessed honey from deep forests.</p>
+
+                    <div class="product-bottom">
+                        <div class="price-box"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; color: #888;">Price on request</span>
+                            <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
+                        </div>
+
+                        <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
+
+                        <div class="button-row">
+                            <button class="btn-secondary" title="Add to Cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </button>
+                            <button class="btn-view" title="View Details">
+                                View Details <i class="fa-solid fa-arrow-up-right-from-square"
+                                    style="font-size: 11px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <div class="brand-logo"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="wishlist-icon"><i class="fa-regular fa-heart"></i></div>
+                    <img src="cow-dung-powder.jpeg" alt="Moringa Powder">
+                </div>
+                <div class="product-info">
+                    <span class="badge">Pure</span>
+                    <h3>Raw Forest Honey</h3>
+                    <p class="product-description">100% pure, unprocessed honey from deep forests.</p>
+
+                    <div class="product-bottom">
+                        <div class="price-box"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 14px; color: #888;">Price on request</span>
+                            <span style="font-size: 20px; font-weight: 700; color: var(--sage-green);">₹499</span>
+                        </div>
+
+                        <button class="btn-main" onclick="openEnquiry('Raw Forest Honey')">Buy Now</button>
+
+                        <div class="button-row">
+                            <button class="btn-secondary" title="Add to Cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </button>
+                            <button class="btn-view" title="View Details">
+                                View Details <i class="fa-solid fa-arrow-up-right-from-square"
+                                    style="font-size: 11px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Reviews / Philosophy -->
+    <!-- Reviews / Philosophy -->
+    <section id="reviews" class="review-section">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="review-grid">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"Devaksa brings the purity of nature straight to your doorstep. The Cow Dung
+                    Cakes are authentic and perfect for my daily hawans. Truly impressed!"</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">AS</div>
+                    <div class="reviewer-details">
+                        <h4>Anjali Sharma</h4>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"The Raw Forest Honey is unlike anything I've tasted. You can feel the rawness
+                    and purity in every spoon. Packaging was also eco-friendly."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">RK</div>
+                    <div class="reviewer-details">
+                        <h4>Rahul Khanna</h4>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <p class="review-text">"I use the Organic Manure for my terrace garden, and the results are amazing. My
+                    plants are healthier and blooming more than ever. Highly recommend!"</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">MP</div>
+                    <div class="reviewer-details">
+                        <h4>Meera Patel</h4>
+                        <span>Gardening Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#" class="link-btn" onclick="openReviewModal()">Write a Review ></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-col">
+                    <h4>Shop and Learn</h4>
+                    <ul>
+                        <li><a href="#">Organic Manure</a></li>
+                        <li><a href="#">Forest Honey</a></li>
+                        <li><a href="#">Moringa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Devaksa</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="min-width: 200px;">
+                    <h4>Get in Touch</h4>
+                    <p style="color: #a1a1a6; font-size: 14px; margin-bottom: 15px; line-height: 1.5;">Have questions or
+                        need a custom order?</p>
+                    <button class="btn-main" onclick="openEnquiryModal()"
+                        style="width: auto; padding: 12px 24px; font-size: 14px;">Product Enquiry</button>
+                </div>
+            </div>
+            <div class="footer-btm">
+                <p>Copyright © 2026 Devaksa Green Solutions. All rights reserved.</p>
+                <p>India</p>
+            </div>
+        </div>
     </footer>
-    <div id="zoomBox" onclick="closeZoom()">
-        <img id="zoomImage">
+
+    <!-- Send Enquiry Modal -->
+    <div id="enquiry-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeEnquiryModal()">&times;</span>
+            <h2>Request a Quote</h2>
+            <form id="enquiry-form" onsubmit="submitEnquiry(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Product Name (e.g. Raw Forest Honey)" required
+                        style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required
+                        style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required
+                        style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Message / Quantity required..." required
+                        style="height: 100px; width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 12px;"></textarea>
+                </div>
+                <button type="submit" class="btn-main">Send Enquiry</button>
+            </form>
+        </div>
     </div>
+
+    <!-- Review Modal -->
+    <div id="review-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeReviewModal()">&times;</span>
+            <h2>Share Your Experience</h2>
+            <form id="review-form" onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>Select Product</option>
+                        <option>Cow Dung Cake</option>
+                        <option>Organic Manure</option>
+                        <option>Raw Forest Honey</option>
+                        <option>Moringa Powder</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="star-rating">
+                        <i class="fa-regular fa-star" onclick="rate(1)"></i>
+                        <i class="fa-regular fa-star" onclick="rate(2)"></i>
+                        <i class="fa-regular fa-star" onclick="rate(3)"></i>
+                        <i class="fa-regular fa-star" onclick="rate(4)"></i>
+                        <i class="fa-regular fa-star" onclick="rate(5)"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Write your review here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-main">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
 </body>
+
 </html>
