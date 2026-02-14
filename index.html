@@ -17,7 +17,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <img src="devaaks-logo.png" alt="Devaksa Logo" class="logo-img">
+                <img src="devaks-logo.png" alt="Devaksa Logo" class="logo-img">
             </a>
             <div class="nav-links">
                 <a href="#products">Products</a>
@@ -61,7 +61,7 @@
             <!-- Product 1 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
+                    <div class="brand-logo"><img src="devaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-cake.jpeg" alt="Cow Dung Cake">
                 </div>
                 <div class="product-info">
@@ -82,7 +82,8 @@
                             <button class="btn-secondary" onclick="addToCart('Cow dung cake')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-                            <button class="btn-view" title="View Details">
+                            <button class="btn-view" title="View Details"
+                                onclick="window.location.href='product.html?id=cow-dung-cake'">
                                 View Details <i class="fa-solid fa-arrow-up-right-from-square"
                                     style="font-size: 11px;"></i>
                             </button>
@@ -94,7 +95,7 @@
             <!-- Product 2 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
+                    <div class="brand-logo"><img src="devaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-manure.jpeg" alt="Cow Dung Manure">
                 </div>
                 <div class="product-info">
@@ -115,7 +116,8 @@
                             <button class="btn-secondary" onclick="addToCart('Cow dung manure')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-                            <button class="btn-view" title="View Details">
+                            <button class="btn-view" title="View Details"
+                                onclick="window.location.href='product.html?id=cow-dung-manure'">
                                 View Details <i class="fa-solid fa-arrow-up-right-from-square"
                                     style="font-size: 11px;"></i>
                             </button>
@@ -127,7 +129,7 @@
             <!-- Product 3 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
+                    <div class="brand-logo"><img src="devaks-logo.png" alt=""></i></div>
                     <img src="natural-pure-raw-honey-.jpeg" alt="Raw Honey">
                 </div>
                 <div class="product-info">
@@ -148,7 +150,8 @@
                             <button class="btn-secondary" onclick="addToCart('Raw Forest Honey')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-                            <button class="btn-view" title="View Details">
+                            <button class="btn-view" title="View Details"
+                                onclick="window.location.href='product.html?id=raw-honey'">
                                 View Details <i class="fa-solid fa-arrow-up-right-from-square"
                                     style="font-size: 11px;"></i>
                             </button>
@@ -160,7 +163,7 @@
             <!-- Product 4 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
-                    <div class="brand-logo"><img src="devaaks-logo.png" alt=""></i></div>
+                    <div class="brand-logo"><img src="devaks-logo.png" alt=""></i></div>
                     <img src="cow-dung-powder.jpeg" alt="Moringa Powder">
                 </div>
                 <div class="product-info">
@@ -181,7 +184,8 @@
                             <button class="btn-secondary" onclick="addToCart('Cow dung powder')" title="Add to Cart">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-                            <button class="btn-view" title="View Details">
+                            <button class="btn-view" title="View Details"
+                                onclick="window.location.href='product.html?id=moringa-powder'">
                                 View Details <i class="fa-solid fa-arrow-up-right-from-square"
                                     style="font-size: 11px;"></i>
                             </button>
@@ -533,6 +537,7 @@
         </div>
     </div>
 
+    <script src="products_data.js"></script>
     <script src="script.js"></script>
 </body>
 
