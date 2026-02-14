@@ -38,6 +38,8 @@ const EnquirySchema = new mongoose.Schema({
     productName: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true },
+    countryCode: { type: String, required: true },
+    mobile: { type: String, required: true },
     message: { type: String, required: true },
     status: { type: String, default: 'new' }, // new, contacted, closed
     createdAt: { type: Date, default: Date.now }

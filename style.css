@@ -866,6 +866,17 @@ img {
     opacity: 1;
 }
 
+@media (max-width: 768px) {
+    .toast-notification {
+        width: 90%;
+        max-width: 400px;
+        bottom: 40px;
+        padding: 15px 20px;
+        font-size: 15px;
+        justify-content: center;
+    }
+}
+
 .toast-notification i {
     color: #4CAF50;
     /* Green check */
@@ -955,6 +966,9 @@ img {
 .star-rating i:hover {
     transform: scale(1.2);
 }
+
+
+/* Removed Custom Country Dropdown Styles */
 
 /* Developer Credit Shine Animation */
 .developer-credit {

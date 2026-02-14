@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
             observer.observe(card);
         });
+
+        // Native select is now being used; custom logic removed.
     });
 });
 
@@ -286,16 +288,16 @@ async function submitReview(e) {
         });
 
         if (response.ok) {
-            alert("Thank you! Your review has been submitted.");
+            showSuccessModal("Thank you! Your review has been submitted.");
             closeReviewModal();
             e.target.reset();
             rate(0);
         } else {
-            alert("Failed to submit review. Please try again.");
+            showSuccessModal("Failed to submit review. Please try again.");
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Something went wrong.");
+        showSuccessModal("Something went wrong.");
     }
 }
 
@@ -328,12 +330,14 @@ if (enquiryModal) {
 
 async function submitEnquiry(e) {
     e.preventDefault();
-    const inputs = e.target.querySelectorAll('input, textarea');
+    const formData = new FormData(e.target);
     const enquiryData = {
-        productName: inputs[0].value,
-        name: inputs[1].value,
-        email: inputs[2].value,
-        message: inputs[3].value
+        productName: formData.get('productName'),
+        name: formData.get('name'),
+        email: formData.get('email'),
+        countryCode: formData.get('countryCode'),
+        mobile: formData.get('mobile'),
+        message: formData.get('message')
     };
 
     try {
@@ -344,15 +348,15 @@ async function submitEnquiry(e) {
         });
 
         if (response.ok) {
-            alert("Enquiry Sent! We will contact you shortly.");
+            showSuccessModal("Enquiry Sent! We will contact you shortly.");
             closeEnquiryModal();
             e.target.reset();
         } else {
-            alert("Failed to send enquiry.");
+            showSuccessModal("Failed to send enquiry.");
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Something went wrong.");
+        showSuccessModal("Something went wrong.");
     }
 }
 
