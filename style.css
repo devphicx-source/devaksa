@@ -896,6 +896,13 @@ img {
     text-align: center;
 }
 
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+    }
+}
+
 .modal-overlay.active .modal-content {
     transform: translateY(0);
 }
