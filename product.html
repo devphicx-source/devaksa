@@ -204,6 +204,9 @@
             color: var(--sage-green);
             transform: translateX(-5px);
         }
+        .btn-main-p{
+width: 50%;
+        }
 
         @media (max-width: 768px) {
             .product-detail-grid {
@@ -276,7 +279,7 @@
                 <p class="detail-description" id="product-desc"></p>
 
                 <div class="detail-price">
-                    <span id="product-price">₹499</span>
+                    <span id="product-price"></span>
                     <span>Inclusive of all taxes</span>
                 </div>
 
@@ -301,7 +304,7 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn-main" onclick="buyNowFromDetail()">Buy Now</button>
+                    <button class="btn-main btn-main-p" onclick="buyNowFromDetail()">Buy Now</button>
                     <button class="btn-secondary" onclick="addToCartFromDetail()"><i
                             class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                 </div>

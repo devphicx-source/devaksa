@@ -372,13 +372,17 @@ async function addToCart(productName) {
     }
 
     try {
-        // Map product names to images (hardcoded for now, ideally from DB)
+        // Map product names to images (Case-insensitive matching)
         const productImages = {
-            'Cow dung cake': 'cow-dung-cake.jpeg',
-            'Cow dung manure': 'cow-dung-manure.jpeg',
-            'Raw Forest Honey': 'natural-pure-raw-honey-.jpeg',
-            'Cow dung powder': 'cow-dung-powder.jpeg'
+            'cow dung cake': 'cow-dung-cake.jpeg',
+            'varmi compost': 'cow-dung-manure.jpeg',
+            'raw forest honey': 'natural-pure-raw-honey-.jpeg',
+            'cow dung manure': 'cow-dung-powder.jpeg',
+            'moringa powder': 'moringa.jpeg'
         };
+
+        const normalizedName = productName.toLowerCase().trim();
+        const image = productImages[normalizedName] || 'devaks-logo.png';
 
         const response = await fetch('/api/cart', {
             method: 'POST',
@@ -389,7 +393,7 @@ async function addToCart(productName) {
             body: JSON.stringify({
                 productName,
                 price: 499, // Hardcoded for now as per index.html
-                image: productImages[productName] || 'devaaks-logo.png'
+                image
             })
         });
 
@@ -402,8 +406,9 @@ async function addToCart(productName) {
             }
             showSuccessModal(`${productName} added to cart!`);
         } else {
-            console.error('Failed response:', await response.text());
-            showSuccessModal("Failed to add item to cart. Make sure server is running.");
+            const errorText = await response.text();
+            console.error('Failed response:', response.status, errorText);
+            showSuccessModal(`Failed to add item to cart (Status: ${response.status}).`);
         }
     } catch (error) {
         console.error("Cart Error:", error);
