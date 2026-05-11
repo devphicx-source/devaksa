@@ -1,0 +1,1071 @@
+/* =========================================
+   1. VARIABLES (Apple Design System)
+   ========================================= */
+:root {
+    /* Colors */
+    --bg-color: #fbfbfd;
+    --card-bg: #ffffff;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent-color: #2e7d32;
+    --link-blue: #0066cc;
+    --border-color: #d2d2d7;
+    --sage-green: #4F6F52;
+    --soft-cream: #FBFADA;
+    --text-main: #2D3E2F;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-size-body: 17px;
+    --font-size-heading: 48px;
+    --font-size-subheading: 24px;
+    --section-padding: 80px 20px;
+    --container-width: 980px;
+    --glass-bg: rgba(251, 251, 253, 0.8);
+    --glass-blur: blur(20px);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --transition-ease: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    font-size: var(--font-size-body);
+    line-height: 1.47059;
+    letter-spacing: -0.022em;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition-ease);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================================
+   2. NAVBAR (Premium Glassmorphism)
+   ========================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    background: rgba(251, 251, 253, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    position: relative;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    position: relative;
+}
+
+.logo-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    opacity: 0.8;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.02);
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 18px;
+    color: var(--text-primary);
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.cart-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: #d32f2f;
+    border-radius: 50%;
+    display: none;
+}
+
+/* =========================================
+   3. HERO SECTION (Immersive)
+   ========================================= */
+.hero-section {
+    height: 100vh;
+    width: 100%;
+    background-image: url("/home.webp");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding-top: 48px;
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.hero-title {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: -0.005em;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 980px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-ease);
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #1b5e20;
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--text-primary);
+}
+
+/* =========================================
+   4. PRODUCT SECTION (Sage Green Premium)
+   ========================================= */
+.product-section {
+    padding: var(--section-padding);
+    background: #fdfdfd;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    color: var(--text-primary);
+    font-family: 'Playfair Display', serif;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(79, 111, 82, 0.1);
+    border-color: rgba(79, 111, 82, 0.2);
+}
+
+.product-img-wrapper {
+    height: 280px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #f9f9f9 0%, #ffffff 80%);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.product-card img {
+    max-height: calc(100% + 20px);
+    max-width: calc(100% + 20px);
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.05));
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+.brand-logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.brand-logo img {
+    width: 24px;
+    height: auto;
+    object-fit: contain;
+}
+
+.product-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    align-self: flex-start;
+    background: var(--soft-cream);
+    color: var(--sage-green);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.product-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #2D3E2F;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.product-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.price-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.btn-main {
+    width: 100%;
+    background: var(--sage-green);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(79, 111, 82, 0.25);
+}
+
+.btn-main:hover {
+    background: #3e5940;
+    transform: translateY(-2px);
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-secondary {
+    flex: 1;
+    background: transparent;
+    border: 1.5px solid var(--sage-green);
+    color: var(--sage-green);
+    height: 42px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background: var(--soft-cream);
+}
+
+.btn-view {
+    flex-grow: 1;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 42px;
+}
+
+.btn-view:hover {
+    border-color: var(--sage-green);
+    color: var(--sage-green);
+    background: #fbfbfd;
+}
+
+/* =========================================
+   Product Detail Page Styles
+   ========================================= */
+.product-page {
+    padding: 100px 20px 60px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.back-btn-container {
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition-ease);
+}
+
+.back-btn:hover {
+    color: var(--sage-green);
+    transform: translateX(-4px);
+}
+
+.product-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.product-image-section {
+    background: radial-gradient(circle, #f9f9f9 0%, #ffffff 80%);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.product-image-section img {
+    max-width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.08));
+    transition: transform 0.5s ease;
+}
+
+.product-image-section:hover img {
+    transform: scale(1.05);
+}
+
+.product-content-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 15px;
+}
+
+.product-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--sage-green);
+    margin-bottom: 30px;
+}
+
+.product-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.btn-main-p {
+    flex: 2;
+    background: var(--sage-green);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(79, 111, 82, 0.25);
+}
+
+.btn-main-p:hover {
+    background: #3e5940;
+    transform: translateY(-2px);
+}
+
+.btn-secondary-p {
+    flex: 1;
+    background: transparent;
+    border: 1.5px solid var(--sage-green);
+    color: var(--sage-green);
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary-p:hover {
+    background: var(--soft-cream);
+}
+
+.product-info-tabs h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 25px 0 10px;
+    color: var(--text-main);
+}
+
+.product-info-tabs p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.product-info-tabs ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.product-info-tabs ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 15px;
+}
+
+.product-info-tabs ul li::before {
+    content: "•";
+    color: var(--sage-green);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 25px;
+    }
+
+    .product-content-section h1 {
+        font-size: 32px;
+    }
+
+    .product-image-section img {
+        max-height: 300px;
+    }
+}
+
+/* =========================================
+   5. REVIEWS (Premium Cards)
+   ========================================= */
+.review-section {
+    background: #fdfdfd;
+    padding: 80px 20px;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.review-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+}
+
+.review-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #333;
+    font-style: italic;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.reviewer-avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--soft-cream);
+    color: var(--sage-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* =========================================
+   6. FOOTER (Premium Dark)
+   ========================================= */
+.footer {
+    background: #1d1d1f;
+    color: #f5f5f7;
+    padding: 80px 0 40px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col h4 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.footer-col ul li {
+    margin-bottom: 14px;
+}
+
+.footer-col a {
+    color: #a1a1a6;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+    color: #ffffff;
+}
+
+.footer-btm {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6e6e73;
+    font-size: 12px;
+}
+
+/* =========================================
+   7. UTILITIES & RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .footer-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Developer Credit Shine Animation */
+.developer-credit {
+    font-weight: 600;
+    background: linear-gradient(to right, #a1a1a6 0%, #fff 50%, #a1a1a6 100%);
+    background-size: 200% auto;
+    color: #a1a1a6;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* =========================================
+   8. CLERK AUTH CUSTOMIZATION (Devaksa Theme)
+   ========================================= */
+.auth-page {
+    background: linear-gradient(135deg, var(--soft-cream) 0%, #fbfbfd 100%);
+    padding-top: 100px;
+    padding-bottom: 50px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card-custom {
+    box-shadow: 0 20px 60px rgba(79, 111, 82, 0.1) !important;
+    border: 1px solid rgba(79, 111, 82, 0.1) !important;
+    border-radius: 28px !important;
+    transition: all 0.3s ease;
+    width: 90%;
+    max-width: 420px;
+    background: #fff;
+    padding: 40px;
+}
+
+@media (max-width: 480px) {
+    .auth-card-custom {
+        padding: 30px 20px !important;
+        border-radius: 20px !important;
+    }
+}
+
+.phone-input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.country-code {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: #f8f9fa;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.auth-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+    border-color: var(--sage-green);
+    box-shadow: 0 0 0 3px rgba(79, 111, 82, 0.1);
+}
+
+.cl-headerTitle {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    color: var(--sage-green) !important;
+}
+
+.cl-formButtonPrimary {
+    background-color: var(--sage-green) !important;
+    border-radius: 12px !important;
+}
+
+.cl-footerActionLink {
+    color: var(--sage-green) !important;
+    font-weight: 600 !important;
+}
+
+.cl-socialButtonsBlockButton {
+    border-radius: 12px !important;
+}
+
+.cl-formFieldInput {
+    border-radius: 10px !important;
+}
+
+/* =========================================
+   9. TOAST NOTIFICATIONS (Devaksa UI)
+   ========================================= */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #ffffff;
+    padding: 16px 24px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(79, 111, 82, 0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+    border: 1px solid rgba(79, 111, 82, 0.1);
+    cursor: pointer;
+    min-width: 320px;
+    animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+@keyframes toastSlideIn {
+    0% {
+        transform: translateX(100%) scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.toast-content i {
+    font-size: 20px;
+}
+
+.toast-container.success {
+    border-left: 5px solid var(--sage-green);
+}
+
+.toast-container.success i {
+    color: var(--sage-green);
+}
+
+.toast-container.error {
+    border-left: 5px solid #d32f2f;
+}
+
+.toast-container.error i {
+    color: #d32f2f;
+}
+
+.toast-content span {
+    font-weight: 500;
+    color: #1d1d1f;
+    font-size: 15px;
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.toast-progress::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--sage-green);
+    animation: toastTimer 3s linear forwards;
+}
+
+.toast-container.error .toast-progress::after {
+    background: #d32f2f;
+}
+
+@keyframes toastTimer {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0%;
+    }
+}
+
+@media (max-width: 480px) {
+    .toast-container {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        min-width: 0;
+    }
+}
+
+/* =========================================
+   10. CATALOGUE BRANDING (Product Detail)
+   ========================================= */
+.catalogue-info-section {
+    margin-top: 60px;
+    background-color: #4F6F52;
+    /* Dark Green from screenshot */
+    padding: 80px 20px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalogue-info-card {
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    text-align: center;
+    color: white;
+}
+
+.company-branding h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.company-tagline {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.expert-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    padding-top: 0;
+    border-top: none;
+}
+
+.expert-contact i {
+    font-size: 24px;
+}
+
+.expert-contact a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Redesigning Buy/Add to Cart Buttons for Product Page */
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.btn-main-p {
+    background: #4F6F52 !important;
+    color: white !important;
+    padding: 18px !important;
+    border-radius: 15px !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    border: none !important;
+    width: 100% !important;
+}
+
+.btn-secondary-p {
+    background: white !important;
+    color: #4F6F52 !important;
+    border: 1px solid #4F6F52 !important;
+    padding: 18px !important;
+    border-radius: 15px !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

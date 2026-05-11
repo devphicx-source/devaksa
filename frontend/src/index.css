@@ -1,0 +1,23 @@
+:root {
+    --sage-green: #4F6F52;
+    --soft-cream: #F5EFE6;
+    --text-main: #1A2130;
+    --text-secondary: #5A639C;
+    --bg-white: #ffffff;
+    --container-width: 1200px;
+    --transition-ease: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    background: var(--bg-white);
+    line-height: 1.5;
+}
