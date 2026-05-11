@@ -60,12 +60,12 @@ app.post('/api/auth/send-otp', async (req, res) => {
             res.json({ message: 'OTP sent (Dev mode)', otp });
         }
     } catch (error) {
-        if (error.code) {
+        if (error.code && (error.code === 21211 || error.code === 21608 || error.status)) {
             console.error('Twilio Error:', error.message);
             return res.status(400).json({ message: `Twilio Error: ${error.message}` });
         }
-        console.error('OTP Send Error:', error);
-        res.status(500).json({ message: 'Failed to send OTP' });
+        console.error('Server Error:', error);
+        res.status(500).json({ message: error.code === 11000 ? 'Phone number already in use or Database Index Error' : 'Failed to send OTP' });
     }
 });
 
