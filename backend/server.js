@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { User, Product, Review, Enquiry } from './models.js';
+import { User, Product, Review, Enquiry, Order } from './models.js';
 import jwt from 'jsonwebtoken';
 import twilio from 'twilio';
 
@@ -155,6 +155,59 @@ app.post('/api/cart', auth, async (req, res) => {
         res.json({ cart: user.cart });
     } catch (error) {
         res.status(500).json({ message: 'Error' });
+    }
+});
+
+// --- ORDER ROUTES ---
+
+// Create Order
+app.post('/api/orders', auth, async (req, res) => {
+    try {
+        const { items, shippingAddress, paymentMethod, totalAmount } = req.body;
+        if (!items || items.length === 0) return res.status(400).json({ message: 'No items in order' });
+
+        const order = new Order({
+            user: req.user.id,
+            items,
+            shippingAddress,
+            paymentMethod: paymentMethod || 'COD',
+            totalAmount,
+            status: 'Confirmed',
+            tracking: [
+                { status: 'Confirmed', message: 'Order placed and confirmed!', timestamp: new Date() }
+            ]
+        });
+        await order.save();
+
+        // Clear user cart after ordering
+        await User.findByIdAndUpdate(req.user.id, { cart: [] });
+
+        res.status(201).json({ message: 'Order placed!', orderId: order._id, order });
+    } catch (error) {
+        console.error('Order Error:', error);
+        res.status(500).json({ message: 'Failed to place order' });
+    }
+});
+
+// Get all orders of logged-in user
+app.get('/api/orders/user', auth, async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user.id }).sort({ createdAt: -1 });
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching orders' });
+    }
+});
+
+// Get single order by ID
+app.get('/api/orders/:id', auth, async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+        if (order.user.toString() !== req.user.id) return res.status(403).json({ message: 'Not authorized' });
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching order' });
     }
 });
 

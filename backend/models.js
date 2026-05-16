@@ -48,7 +48,37 @@ const EnquirySchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
+// Order Schema
+const OrderSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    items: [{
+        productName: { type: String, required: true },
+        price: { type: Number, required: true },
+        image: { type: String },
+        quantity: { type: Number, default: 1 }
+    }],
+    shippingAddress: {
+        fullName: { type: String, required: true },
+        phone: { type: String, required: true },
+        email: { type: String },
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        pincode: { type: String, required: true }
+    },
+    paymentMethod: { type: String, default: 'COD', enum: ['COD', 'Prepaid'] },
+    totalAmount: { type: Number, required: true },
+    status: { type: String, default: 'Pending', enum: ['Pending', 'Confirmed', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled'] },
+    tracking: [{
+        status: { type: String },
+        message: { type: String },
+        timestamp: { type: Date, default: Date.now }
+    }],
+    createdAt: { type: Date, default: Date.now }
+});
+
 export const User = mongoose.model('User', UserSchema);
 export const Product = mongoose.model('Product', ProductSchema);
 export const Review = mongoose.model('Review', ReviewSchema);
 export const Enquiry = mongoose.model('Enquiry', EnquirySchema);
+export const Order = mongoose.model('Order', OrderSchema);

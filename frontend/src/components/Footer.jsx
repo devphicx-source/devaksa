@@ -41,7 +41,7 @@ const Footer = () => {
                     <p>Copyright © 2026 Devaksa Green Solutions. All rights reserved.</p>
                     <p>India</p>
                     <p className="developer-credit" style={{ marginTop: '5px', fontSize: '13px', opacity: 0.7 }}>
-                        Developer: <a href="mailto:mrprimi91@gmail.com" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Prince Mishra</a>
+                        Developer: <a href="mailto:mrprimi91@gmail.com" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Nishant & RaviKaran</a>
                         <i className="fa-solid fa-code" style={{ fontSize: '11px', marginLeft: '5px' }}></i>
                     </p>
                 </div>

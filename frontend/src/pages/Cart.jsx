@@ -90,7 +90,9 @@ const Cart = () => {
                             <span>Total</span>
                             <span style={{ color: 'var(--sage-green)' }}>₹{total + 49}</span>
                         </div>
-                        <button className="btn-main" style={{ width: '100%' }}>Checkout</button>
+                        <Link to="/checkout" className="btn-main" style={{ width: '100%', display: 'block', textAlign: 'center', padding: '14px', borderRadius: '12px', fontWeight: '600', fontSize: '15px', textDecoration: 'none' }}>
+                            Proceed to Checkout →
+                        </Link>
                     </div>
                 </div>
             )}
