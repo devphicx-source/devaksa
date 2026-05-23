@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { useAuth } from '../context/AuthContext';
@@ -56,6 +57,96 @@ const Home = () => {
     const { showToast } = useToast();
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
+
+    // Review States
+    const [reviews, setReviews] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [submittingReview, setSubmittingReview] = useState(false);
+    const [reviewForm, setReviewForm] = useState({
+        reviewerName: '',
+        rating: 5,
+        productName: 'Cow Dung Cake',
+        comment: ''
+    });
+
+    const defaultReviews = [
+        {
+            _id: 'default1',
+            reviewerName: 'Rohan Sharma',
+            productName: 'Cow Dung Cake',
+            rating: 5,
+            comment: 'Aura aur purity dono kamaal hain! Pura natural feel aata hai hawan ke dauran. Highly recommended!',
+            createdAt: '2026-05-18T10:00:00Z'
+        },
+        {
+            _id: 'default2',
+            reviewerName: 'Priya Patel',
+            productName: 'Natural Honey',
+            rating: 5,
+            comment: 'Market ke doosre honey se bilkul alag hai. Pure organic taste aur thick consistency hai. Sourcing is genuine.',
+            createdAt: '2026-05-20T12:30:00Z'
+        },
+        {
+            _id: 'default3',
+            reviewerName: 'Anil Verma',
+            productName: 'Vermi Compost (Organic Manure)',
+            rating: 5,
+            comment: 'Mera terrace garden ab bohot hara bhara ho gaya hai. Plant growth fast aur healthy ho gayi hai. Sasta aur badhiya product.',
+            createdAt: '2026-05-22T08:15:00Z'
+        }
+    ];
+
+    useEffect(() => {
+        fetchReviews();
+    }, []);
+
+    const fetchReviews = async () => {
+        try {
+            const res = await fetch('/api/reviews');
+            if (res.ok) {
+                const data = await res.json();
+                setReviews(data);
+            }
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+        }
+    };
+
+    const handleReviewSubmit = async (e) => {
+        e.preventDefault();
+        setSubmittingReview(true);
+        try {
+            const res = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reviewForm)
+            });
+
+            if (res.ok) {
+                showToast('Review submitted successfully! Thank you. 🌿');
+                setReviewForm({ reviewerName: '', rating: 5, productName: 'Cow Dung Cake', comment: '' });
+                setShowForm(false);
+                fetchReviews();
+            } else {
+                showToast('Failed to submit review', 'error');
+            }
+        } catch (error) {
+            console.error('Review error:', error);
+            showToast('Something went wrong', 'error');
+        } finally {
+            setSubmittingReview(false);
+        }
+    };
+
+    const renderStars = (rating) => {
+        return Array.from({ length: 5 }, (_, i) => (
+            <i key={i} className={`fa-star ${i < rating ? 'fa-solid' : 'fa-regular'}`}></i>
+        ));
+    };
+
+    const displayedReviews = reviews.length > 0 ? [...reviews, ...defaultReviews] : defaultReviews;
 
     const searchQuery = searchParams.get('search') || '';
 
@@ -170,10 +261,129 @@ const Home = () => {
                         </p>
                     </section>
 
-                    <section id="reviews" style={{ padding: '80px 20px', textAlign: 'center' }}>
-                        <h2>Customer Love</h2>
-                        <div style={{ margin: '40px 0', fontStyle: 'italic', color: '#555' }}>
-                            "Purity you can trust."
+                    <section id="reviews" className="reviews-section">
+                        <div className="reviews-container">
+                            <h2>Customer Love</h2>
+                            <p style={{ color: '#666', marginTop: '10px' }}>What our beautiful family says about Devaksa Green Solutions 🌿</p>
+                            
+                            <div className="reviews-grid">
+                                {displayedReviews.slice(0, 6).map((review) => (
+                                    <div key={review._id} className="review-card">
+                                        <div>
+                                            <div className="review-header">
+                                                <div className="review-user-info">
+                                                    <div className="review-avatar">
+                                                        {review.reviewerName ? review.reviewerName.charAt(0) : 'U'}
+                                                    </div>
+                                                    <div>
+                                                        <div className="reviewer-name">{review.reviewerName}</div>
+                                                        <div className="reviewer-product">{review.productName}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="review-stars">
+                                                    {renderStars(review.rating)}
+                                                </div>
+                                            </div>
+                                            <p className="review-comment">"{review.comment}"</p>
+                                        </div>
+                                        <div className="review-date">
+                                            {new Date(review.createdAt).toLocaleDateString('en-IN', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {!showForm ? (
+                                <button className="write-review-btn" onClick={() => setShowForm(true)}>
+                                    <i className="fa-solid fa-pen-to-square"></i> Share Your Experience
+                                </button>
+                            ) : (
+                                <div className="review-form-container">
+                                    <h3 style={{ marginBottom: '15px', color: 'var(--sage-green)', textAlign: 'center' }}>Share Your Feedback</h3>
+                                    <form onSubmit={handleReviewSubmit}>
+                                        <div className="enquiry-field" style={{ marginBottom: '15px' }}>
+                                            <label>Your Name *</label>
+                                            <input
+                                                type="text"
+                                                required
+                                                placeholder="Enter your name"
+                                                value={reviewForm.reviewerName}
+                                                onChange={(e) => setReviewForm({ ...reviewForm, reviewerName: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <div className="enquiry-field" style={{ marginBottom: '15px' }}>
+                                            <label>Product Purchased *</label>
+                                            <select
+                                                style={{
+                                                    background: 'rgba(255,255,255,0.08)',
+                                                    border: '1px solid rgba(0,0,0,0.1)',
+                                                    borderRadius: '10px',
+                                                    fontSize: '14px',
+                                                    padding: '12px 14px',
+                                                    outline: 'none',
+                                                    width: '100%',
+                                                    fontFamily: 'inherit'
+                                                }}
+                                                value={reviewForm.productName}
+                                                onChange={(e) => setReviewForm({ ...reviewForm, productName: e.target.value })}
+                                            >
+                                                {products.map(p => (
+                                                    <option key={p.id} value={p.name}>{p.name}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+                                        <div className="enquiry-field" style={{ marginBottom: '15px' }}>
+                                            <label>Rating *</label>
+                                            <div className="star-rating-selector">
+                                                {[1, 2, 3, 4, 5].map((star) => (
+                                                    <i
+                                                        key={star}
+                                                        className={`star-interactive fa-star ${star <= reviewForm.rating ? 'fa-solid' : 'fa-regular'}`}
+                                                        style={{ color: '#ffb800' }}
+                                                        onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                                                    ></i>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="enquiry-field" style={{ marginBottom: '20px' }}>
+                                            <label>Your Review *</label>
+                                            <textarea
+                                                required
+                                                rows={4}
+                                                placeholder="Write your experience..."
+                                                value={reviewForm.comment}
+                                                onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <div style={{ display: 'flex', gap: '10px' }}>
+                                            <button
+                                                type="submit"
+                                                className="btn-main"
+                                                style={{ width: 'auto', padding: '12px 24px', flex: 1 }}
+                                                disabled={submittingReview}
+                                            >
+                                                {submittingReview ? 'Submitting...' : 'Submit Review'}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="write-review-btn"
+                                                style={{ margin: 0, padding: '12px 24px' }}
+                                                onClick={() => setShowForm(false)}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            )}
                         </div>
                     </section>
                 </>

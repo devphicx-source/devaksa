@@ -40,9 +40,10 @@ const ReviewSchema = new mongoose.Schema({
 const EnquirySchema = new mongoose.Schema({
     productName: { type: String },
     name: { type: String, required: true },
-    email: { type: String, required: true },
-    countryCode: { type: String, required: true },
-    mobile: { type: String, required: true },
+    email: { type: String },
+    countryCode: { type: String },
+    mobile: { type: String },
+    phone: { type: String },
     message: { type: String, required: true },
     status: { type: String, default: 'new' }, // new, contacted, closed
     createdAt: { type: Date, default: Date.now }
