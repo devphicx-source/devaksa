@@ -98,6 +98,7 @@ const ProductDetail = () => {
             });
             if (res.ok) {
                 showToast(`${product.name} (${selectedVariant.size}) added to cart!`);
+                window.dispatchEvent(new Event('cartUpdated'));
             } else {
                 showToast('Failed to add to cart', 'error');
             }

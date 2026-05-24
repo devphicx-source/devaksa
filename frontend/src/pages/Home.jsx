@@ -49,6 +49,24 @@ const products = [
         unit: '100 g',
         image: 'moringa.jpeg',
         badge: 'Superfood'
+    },
+    {
+        id: 'neem-powder',
+        name: 'Neem Powder',
+        description: 'Pure and natural neem powder for skin, haircare, and plants.',
+        price: 160,
+        unit: '200 g',
+        image: 'neem-powder.jpeg',
+        badge: '100% Natural'
+    },
+    {
+        id: 'sabji-masala',
+        name: 'Sabji Masala',
+        description: 'Premium quality Sabji Masala, carefully blended from selected spices to enhance taste and aroma.',
+        price: 250,
+        unit: '200 g',
+        image: 'sabji-masala.jpeg',
+        badge: 'Premium Quality'
     }
 ];
 
@@ -178,6 +196,7 @@ const Home = () => {
             });
             if (res.ok) {
                 showToast(`${product.name} added to cart!`);
+                window.dispatchEvent(new Event('cartUpdated'));
             } else {
                 showToast('Failed to add to cart', 'error');
             }

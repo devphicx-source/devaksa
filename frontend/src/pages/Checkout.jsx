@@ -81,6 +81,7 @@ const Checkout = () => {
             const data = await res.json();
             if (res.ok) {
                 showToast('🎉 Order placed successfully!');
+                window.dispatchEvent(new Event('cartUpdated'));
                 navigate(`/order/${data.orderId}`);
             } else {
                 showToast(data.message || 'Failed to place order', 'error');

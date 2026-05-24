@@ -14,13 +14,39 @@ const products = [
 ];
 
 const Navbar = () => {
-    const { user, logout } = useAuth();
+    const { user, token, logout } = useAuth();
     const [search, setSearch] = useState('');
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
     const navigate = useNavigate();
+
+    const fetchCartCount = async () => {
+        if (!token) {
+            setCartCount(0);
+            return;
+        }
+        try {
+            const res = await fetch('/api/cart', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                const count = data.reduce((acc, item) => acc + item.quantity, 0);
+                setCartCount(count);
+            }
+        } catch (error) {
+            console.error('Failed to fetch cart count', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCartCount();
+        window.addEventListener('cartUpdated', fetchCartCount);
+        return () => window.removeEventListener('cartUpdated', fetchCartCount);
+    }, [token]);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 10);
@@ -134,7 +160,7 @@ const Navbar = () => {
                         <Link to="/cart" className="navbar-cart-btn" onClick={() => setMenuOpen(false)}>
                             <div className="navbar-cart-icon-wrap">
                                 <i className="fa-solid fa-cart-shopping"></i>
-                                <span className="navbar-cart-badge">0</span>
+                                <span className="navbar-cart-badge">{cartCount}</span>
                             </div>
                             <span className="navbar-cart-label navbar-desktop-only-inline">Cart</span>
                         </Link>
@@ -258,7 +284,7 @@ const Navbar = () => {
                         <h3 className="logout-modal-title">Sign Out?</h3>
                         <p className="logout-modal-msg">
                             Kya aap wakai sign out karna chahte hain?<br />
-                            <span>Aapka cart bhi clear ho jaayega.</span>
+                            {/* <span>Aapka cart bhi clear ho jaayega.</span> */}
                         </p>
                         <div className="logout-modal-actions">
                             <button
