@@ -23,6 +23,7 @@ const Checkout = () => {
     const [loading, setLoading] = useState(true);
     const [placing, setPlacing] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('COD');
+    const [selectedUpiApp, setSelectedUpiApp] = useState(null);
 
     const [address, setAddress] = useState({
         fullName: user?.name || '',
@@ -226,12 +227,42 @@ const Checkout = () => {
 
                             {paymentMethod === 'UPI' && (
                                 <div className="payment-expanded-details">
-                                    <p>You will be redirected to your UPI app to complete the payment.</p>
+                                    <p>Select your UPI app to generate QR code and link.</p>
                                     <div className="upi-logos">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" className="upi-logo-img" />
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" className="upi-logo-img" />
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Paytm_logo.svg" alt="Paytm" className="upi-logo-img" />
+                                        <img 
+                                            src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" 
+                                            alt="GPay" 
+                                            className="upi-logo-img" 
+                                            style={{ cursor: 'pointer', border: selectedUpiApp === 'GPay' ? '2px solid var(--sage-green)' : '2px solid transparent', borderRadius: '4px', padding: '2px' }}
+                                            onClick={() => setSelectedUpiApp('GPay')}
+                                        />
+                                        <img 
+                                            src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" 
+                                            alt="PhonePe" 
+                                            className="upi-logo-img" 
+                                            style={{ cursor: 'pointer', border: selectedUpiApp === 'PhonePe' ? '2px solid var(--sage-green)' : '2px solid transparent', borderRadius: '4px', padding: '2px' }}
+                                            onClick={() => setSelectedUpiApp('PhonePe')}
+                                        />
+                                        <img 
+                                            src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Paytm_logo.svg" 
+                                            alt="Paytm" 
+                                            className="upi-logo-img" 
+                                            style={{ cursor: 'pointer', border: selectedUpiApp === 'Paytm' ? '2px solid var(--sage-green)' : '2px solid transparent', borderRadius: '4px', padding: '2px' }}
+                                            onClick={() => setSelectedUpiApp('Paytm')}
+                                        />
                                     </div>
+
+                                    {selectedUpiApp && (
+                                        <div style={{ marginTop: '20px', textAlign: 'center', animation: 'slideDown 0.3s ease-out' }}>
+                                            <p style={{ marginBottom: '10px', fontWeight: '600', color: '#1d1d1f' }}>Scan QR Code with {selectedUpiApp}</p>
+                                            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=devaksa@upi`} alt="UPI QR Code" style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '10px', background: 'white' }} />
+                                            <div style={{ marginTop: '15px' }}>
+                                                <button type="button" className="btn-main" style={{ width: 'auto', padding: '10px 24px', borderRadius: '30px' }} onClick={() => showToast(`Redirecting to ${selectedUpiApp}...`)}>
+                                                    Redirect to {selectedUpiApp}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
