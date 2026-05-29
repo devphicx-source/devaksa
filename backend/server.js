@@ -211,6 +211,31 @@ app.get('/api/orders/:id', auth, async (req, res) => {
     }
 });
 
+// Cancel Order
+app.patch('/api/orders/:id/cancel', auth, async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+        if (order.user.toString() !== req.user.id) return res.status(403).json({ message: 'Not authorized' });
+        
+        if (order.status === 'Delivered' || order.status === 'Cancelled') {
+            return res.status(400).json({ message: `Cannot cancel an order that is already ${order.status}` });
+        }
+
+        order.status = 'Cancelled';
+        order.tracking.push({
+            status: 'Cancelled',
+            message: 'Order was cancelled by you.',
+            timestamp: new Date()
+        });
+
+        await order.save();
+        res.json({ message: 'Order cancelled successfully', order });
+    } catch (error) {
+        res.status(500).json({ message: 'Error cancelling order' });
+    }
+});
+
 // Serve Static Assets in Production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));

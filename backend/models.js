@@ -67,7 +67,7 @@ const OrderSchema = new mongoose.Schema({
         state: { type: String, required: true },
         pincode: { type: String, required: true }
     },
-    paymentMethod: { type: String, default: 'COD', enum: ['COD', 'Prepaid'] },
+    paymentMethod: { type: String, default: 'COD', enum: ['COD', 'Prepaid', 'UPI', 'Card', 'NetBanking'] },
     totalAmount: { type: Number, required: true },
     status: { type: String, default: 'Pending', enum: ['Pending', 'Confirmed', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled'] },
     tracking: [{

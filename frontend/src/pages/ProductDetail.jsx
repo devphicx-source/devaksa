@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
@@ -65,11 +65,34 @@ const productData = {
             { size: '250 g', price: 449 },
             { size: '500 g', price: 749 }
         ]
+    },
+    'neem-powder': {
+        name: 'Neem Powder',
+        image: 'neem-powder.jpeg',
+        description: 'Pure and natural neem powder for skin, haircare, and plants.',
+        benefits: ['Improves skin health', 'Helps with dandruff', 'Natural pesticide for plants', '100% natural'],
+        usage: 'Can be mixed with water for skin/hair application, or mixed with soil for plants.',
+        shelfLife: '12 months',
+        variants: [
+            { size: '200 g', price: 160 }
+        ]
+    },
+    'sabji-masala': {
+        name: 'Sabji Masala',
+        image: 'sabji-masala.jpeg',
+        description: 'Premium quality Sabji Masala, carefully blended from selected spices to enhance taste and aroma.',
+        benefits: ['Enhances flavor', 'Made from natural spices', 'No artificial colors', 'Authentic taste'],
+        usage: 'Add to vegetable dishes during cooking for an authentic flavor.',
+        shelfLife: '12 months',
+        variants: [
+            { size: '200 g', price: 250 }
+        ]
     }
 };
 
 const ProductDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const product = productData[id];
     const { user, token } = useAuth();
     const { showToast } = useToast();
@@ -106,6 +129,21 @@ const ProductDetail = () => {
             showToast('Connection error', 'error');
             console.error('Cart error:', error);
         }
+    };
+
+    const handleDirectBuy = () => {
+        if (!token) return showToast('Please login to buy', 'error');
+        navigate('/checkout', {
+            state: {
+                directBuyItem: {
+                    productId: id,
+                    productName: `${product.name} (${selectedVariant.size})`,
+                    price: selectedVariant.price,
+                    image: product.image,
+                    quantity: 1
+                }
+            }
+        });
     };
 
     return (
@@ -149,7 +187,7 @@ const ProductDetail = () => {
 
                     {user ? (
                         <div className="product-actions">
-                            <button className="btn-main-p" onClick={handleAddToCart}>Buy Now</button>
+                            <button className="btn-main-p" onClick={handleDirectBuy}>Buy Now</button>
                             <button className="btn-secondary-p" onClick={handleAddToCart}>
                                 <i className="fa-solid fa-cart-shopping"></i> Add to Cart
                             </button>

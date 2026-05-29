@@ -205,9 +205,19 @@ const Home = () => {
         }
     };
 
-    const handleBuyNow = async (product) => {
-        await handleAddToCart(product);
-        navigate('/checkout');
+    const handleBuyNow = (product) => {
+        if (!token) return showToast('Please login to buy', 'error');
+        navigate('/checkout', {
+            state: {
+                directBuyItem: {
+                    productId: product.id,
+                    productName: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                }
+            }
+        });
     };
 
     return (

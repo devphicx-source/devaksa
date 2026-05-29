@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
@@ -15,9 +15,11 @@ const indianStates = [
 const Checkout = () => {
     const { user, token } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const { showToast } = useToast();
 
     const [cart, setCart] = useState([]);
+    const [isDirectBuy, setIsDirectBuy] = useState(false);
     const [loading, setLoading] = useState(true);
     const [placing, setPlacing] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('COD');
@@ -34,8 +36,15 @@ const Checkout = () => {
 
     useEffect(() => {
         if (!user) { navigate('/login'); return; }
-        fetchCart();
-    }, [user]);
+        
+        if (location.state?.directBuyItem) {
+            setCart([location.state.directBuyItem]);
+            setIsDirectBuy(true);
+            setLoading(false);
+        } else {
+            fetchCart();
+        }
+    }, [user, location.state]);
 
     const fetchCart = async () => {
         try {
@@ -202,28 +211,91 @@ const Checkout = () => {
                             Payment Method
                         </h2>
                         <div className="payment-options">
+                            <label className={`payment-option ${paymentMethod === 'UPI' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio" name="payment" value="UPI"
+                                    checked={paymentMethod === 'UPI'}
+                                    onChange={() => setPaymentMethod('UPI')}
+                                />
+                                <i className="fa-brands fa-google-pay payment-icon-large"></i>
+                                <div>
+                                    <strong>UPI (GPay, PhonePe, Paytm)</strong>
+                                    <span>Fast and secure bank transfer</span>
+                                </div>
+                            </label>
+
+                            {paymentMethod === 'UPI' && (
+                                <div className="payment-expanded-details">
+                                    <p>You will be redirected to your UPI app to complete the payment.</p>
+                                    <div className="upi-logos">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" className="upi-logo-img" />
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" className="upi-logo-img" />
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Paytm_logo.svg" alt="Paytm" className="upi-logo-img" />
+                                    </div>
+                                </div>
+                            )}
+
+                            <label className={`payment-option ${paymentMethod === 'Card' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio" name="payment" value="Card"
+                                    checked={paymentMethod === 'Card'}
+                                    onChange={() => setPaymentMethod('Card')}
+                                />
+                                <i className="fa-regular fa-credit-card payment-icon-large"></i>
+                                <div>
+                                    <strong>Credit / Debit Card</strong>
+                                    <span>Visa, MasterCard, RuPay</span>
+                                </div>
+                            </label>
+
+                            {paymentMethod === 'Card' && (
+                                <div className="payment-expanded-details">
+                                    <div className="mock-card-form">
+                                        <input type="text" placeholder="Card Number" className="mock-input full-width" readOnly value="XXXX-XXXX-XXXX-XXXX" />
+                                        <div style={{ display: 'flex', gap: '10px' }}>
+                                            <input type="text" placeholder="MM/YY" className="mock-input" readOnly value="12/26" />
+                                            <input type="text" placeholder="CVV" className="mock-input" readOnly value="***" />
+                                        </div>
+                                    </div>
+                                    <p className="mock-note">* Mock Gateway Integration</p>
+                                </div>
+                            )}
+
+                            <label className={`payment-option ${paymentMethod === 'NetBanking' ? 'selected' : ''}`}>
+                                <input
+                                    type="radio" name="payment" value="NetBanking"
+                                    checked={paymentMethod === 'NetBanking'}
+                                    onChange={() => setPaymentMethod('NetBanking')}
+                                />
+                                <i className="fa-solid fa-building-columns payment-icon-large"></i>
+                                <div>
+                                    <strong>Net Banking</strong>
+                                    <span>All major Indian banks supported</span>
+                                </div>
+                            </label>
+
+                            {paymentMethod === 'NetBanking' && (
+                                <div className="payment-expanded-details">
+                                    <select className="mock-input full-width">
+                                        <option>State Bank of India</option>
+                                        <option>HDFC Bank</option>
+                                        <option>ICICI Bank</option>
+                                        <option>Axis Bank</option>
+                                    </select>
+                                    <p className="mock-note">* Mock Gateway Integration</p>
+                                </div>
+                            )}
+
                             <label className={`payment-option ${paymentMethod === 'COD' ? 'selected' : ''}`}>
                                 <input
                                     type="radio" name="payment" value="COD"
                                     checked={paymentMethod === 'COD'}
                                     onChange={() => setPaymentMethod('COD')}
                                 />
-                                <i className="fa-solid fa-money-bill-wave"></i>
+                                <i className="fa-solid fa-money-bill-wave payment-icon-large"></i>
                                 <div>
                                     <strong>Cash on Delivery</strong>
-                                    <span>Pay when you receive</span>
-                                </div>
-                            </label>
-                            <label className={`payment-option ${paymentMethod === 'Prepaid' ? 'selected' : ''}`}>
-                                <input
-                                    type="radio" name="payment" value="Prepaid"
-                                    checked={paymentMethod === 'Prepaid'}
-                                    onChange={() => setPaymentMethod('Prepaid')}
-                                />
-                                <i className="fa-solid fa-credit-card"></i>
-                                <div>
-                                    <strong>Online Payment</strong>
-                                    <span>UPI / Card / Net Banking</span>
+                                    <span>Pay when you receive the order</span>
                                 </div>
                             </label>
                         </div>

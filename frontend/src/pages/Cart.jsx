@@ -66,8 +66,15 @@ const Cart = () => {
                                     <h3 style={{ fontSize: '18px', marginBottom: '5px' }}>{item.productName}</h3>
                                     <p style={{ color: '#666', fontSize: '14px' }}>Quantity: {item.quantity}</p>
                                 </div>
-                                <div style={{ textAlign: 'right' }}>
+                                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-end' }}>
                                     <p style={{ fontWeight: '600' }}>₹{item.price * item.quantity}</p>
+                                    <button 
+                                        className="btn-secondary" 
+                                        style={{ padding: '6px 12px', fontSize: '12px', width: 'auto' }}
+                                        onClick={() => navigate('/checkout', { state: { directBuyItem: item } })}
+                                    >
+                                        Buy This Only
+                                    </button>
                                 </div>
                             </div>
                         ))}

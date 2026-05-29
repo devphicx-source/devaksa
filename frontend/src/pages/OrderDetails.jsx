@@ -28,6 +28,7 @@ const OrderDetails = () => {
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [celebrated, setCelebrated] = useState(false);
+    const [cancelling, setCancelling] = useState(false);
 
     useEffect(() => {
         fetchOrder();
@@ -52,6 +53,30 @@ const OrderDetails = () => {
             navigate('/orders');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleCancelOrder = async () => {
+        if (!window.confirm('Are you sure you want to cancel this order?')) return;
+        
+        setCancelling(true);
+        try {
+            const res = await fetch(`/api/orders/${id}/cancel`, {
+                method: 'PATCH',
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const data = await res.json();
+            
+            if (res.ok) {
+                showToast('Order cancelled successfully');
+                setOrder(data.order);
+            } else {
+                showToast(data.message || 'Failed to cancel order', 'error');
+            }
+        } catch (error) {
+            showToast('Network error while cancelling', 'error');
+        } finally {
+            setCancelling(false);
         }
     };
 
@@ -234,6 +259,26 @@ const OrderDetails = () => {
                             </div>
                         </div>
                     </div>
+
+                    {order.status !== 'Delivered' && order.status !== 'Cancelled' && (
+                        <button 
+                            className="btn-secondary" 
+                            style={{ 
+                                width: '100%', 
+                                padding: '14px', 
+                                borderRadius: '12px', 
+                                fontWeight: '600', 
+                                color: '#d32f2f', 
+                                border: '1px solid #d32f2f',
+                                background: 'transparent',
+                                marginBottom: '16px'
+                            }}
+                            onClick={handleCancelOrder}
+                            disabled={cancelling}
+                        >
+                            {cancelling ? 'Cancelling...' : <><i className="fa-solid fa-ban"></i> Cancel Order</>}
+                        </button>
+                    )}
 
                     <Link to="/" className="order-continue-shopping">
                         <i className="fa-solid fa-arrow-left"></i> Continue Shopping
