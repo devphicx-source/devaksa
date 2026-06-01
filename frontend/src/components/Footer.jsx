@@ -23,7 +23,7 @@ const Footer = () => {
         }
 
         const msg = `Hello Devaksa!\nName: ${form.name}\nEmail: ${form.email || 'N/A'}\nPhone: ${form.phone}\nMessage: ${form.message}`;
-        const waUrl = `https://wa.me/918949987854?text=${encodeURIComponent(msg)}`;
+        const waUrl = `https://wa.me/916307365754?text=${encodeURIComponent(msg)}`;
 
         try {
             // Save enquiry to database
@@ -212,7 +212,7 @@ const Footer = () => {
                                         Agar WhatsApp page open nahi hua, toh neeche button pe click karein:
                                     </p>
                                     <a
-                                        href={`https://wa.me/918949987854?text=${encodeURIComponent(`Hello Devaksa!\nName: ${form.name}\nEmail: ${form.email || 'N/A'}\nPhone: ${form.phone}\nMessage: ${form.message}`)}`}
+                                        href={`https://wa.me/916307365754?text=${encodeURIComponent(`Hello Devaksa!\nName: ${form.name}\nEmail: ${form.email || 'N/A'}\nPhone: ${form.phone}\nMessage: ${form.message}`)}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="enquiry-submit"

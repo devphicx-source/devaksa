@@ -255,7 +255,7 @@ const Checkout = () => {
                                     {selectedUpiApp && (
                                         <div style={{ marginTop: '20px', textAlign: 'center', animation: 'slideDown 0.3s ease-out' }}>
                                             <p style={{ marginBottom: '10px', fontWeight: '600', color: '#1d1d1f' }}>Scan QR Code with {selectedUpiApp}</p>
-                                            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=devaksa@upi`} alt="UPI QR Code" style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '10px', background: 'white' }} />
+                                            <img src="/payment-qr.png" alt="UPI QR Code" style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '10px', background: 'white', maxWidth: '200px', width: '100%', height: 'auto' }} />
                                             <div style={{ marginTop: '15px' }}>
                                                 <button type="button" className="btn-main" style={{ width: 'auto', padding: '10px 24px', borderRadius: '30px' }} onClick={() => showToast(`Redirecting to ${selectedUpiApp}...`)}>
                                                     Redirect to {selectedUpiApp}

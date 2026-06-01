@@ -2152,3 +2152,32 @@ img {
     font-style: italic;
     margin-top: 8px;
 }
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 60px;
+    }
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-title {
+        font-size: 36px;
+        line-height: 1.2;
+        text-align: center;
+    }
+    .hero-subtitle {
+        font-size: 18px;
+        text-align: center;
+    }
+    .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-cta-group .btn {
+        width: 100%;
+    }
+}
+
