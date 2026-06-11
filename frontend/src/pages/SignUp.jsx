@@ -125,7 +125,7 @@ const SignUp = () => {
                             {loading ? 'Sending OTP...' : 'Sign Up'}
                         </button>
                         <p style={{ textAlign: 'center', fontSize: '14px', color: '#666' }}>
-                            Already have an account? <Link to="/login" style={{ color: '#026B5C', fontWeight: '600', textDecoration: 'none' }}>Login</Link>
+                            Already have an account? <Link to="/login" style={{ color: '#234B4A', fontWeight: '600', textDecoration: 'none' }}>Login</Link>
                         </p>
                     </form>
                 ) : (

@@ -110,7 +110,7 @@ const Login = () => {
                             {loading ? 'Sending...' : 'Get OTP'}
                         </button>
                         <p style={{ textAlign: 'center', fontSize: '14px', color: '#666' }}>
-                            Don't have an account? <Link to="/signup" style={{ color: '#026B5C', fontWeight: '600', textDecoration: 'none' }}>Sign Up</Link>
+                            Don't have an account? <Link to="/signup" style={{ color: '#234B4A', fontWeight: '600', textDecoration: 'none' }}>Sign Up</Link>
                         </p>
                     </form>
                 ) : (

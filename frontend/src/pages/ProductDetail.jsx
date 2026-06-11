@@ -170,7 +170,7 @@ const ProductDetail = () => {
                                         padding: '10px 20px',
                                         borderRadius: '30px',
                                         border: selectedVariant.size === v.size ? '2px solid var(--sage-green)' : '1px solid #ddd',
-                                        background: selectedVariant.size === v.size ? 'rgba(2, 107, 92, 0.05)' : 'white',
+                                        background: selectedVariant.size === v.size ? 'rgba(35, 75, 74, 0.05)' : 'white',
                                         color: selectedVariant.size === v.size ? 'var(--sage-green)' : '#666',
                                         fontWeight: '600',
                                         cursor: 'pointer',
