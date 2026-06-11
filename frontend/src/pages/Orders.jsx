@@ -91,9 +91,9 @@ const Orders = () => {
                                 {order.items.map((item, idx) => (
                                     <div key={idx} className="order-list-item">
                                         <img
-                                            src={item.image ? `/${item.image}` : `https://placehold.co/60x60/e8f0e9/4F6F52?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`}
+                                            src={item.image ? `/${item.image}` : `https://placehold.co/60x60/e8f0e9/026B5C?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`}
                                             alt={item.productName}
-                                            onError={(e) => { e.target.src = `https://placehold.co/60x60/e8f0e9/4F6F52?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`; }}
+                                            onError={(e) => { e.target.src = `https://placehold.co/60x60/e8f0e9/026B5C?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`; }}
                                         />
                                         <div>
                                             <p>{item.productName}</p>

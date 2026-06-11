@@ -195,10 +195,10 @@ const OrderDetails = () => {
                             {order.items.map((item, idx) => (
                                 <div key={idx} className="order-item-row">
                                     <img
-                                        src={item.image ? `/${item.image}` : `https://placehold.co/70x70/e8f0e9/4F6F52?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`}
+                                        src={item.image ? `/${item.image}` : `https://placehold.co/70x70/e8f0e9/026B5C?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`}
                                         alt={item.productName}
                                         className="order-item-img"
-                                        onError={(e) => { e.target.src = `https://placehold.co/70x70/e8f0e9/4F6F52?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`; }}
+                                        onError={(e) => { e.target.src = `https://placehold.co/70x70/e8f0e9/026B5C?text=${encodeURIComponent(item.productName?.charAt(0) || 'P')}`; }}
                                     />
                                     <div className="order-item-info">
                                         <p className="order-item-name">{item.productName}</p>

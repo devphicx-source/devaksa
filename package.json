@@ -2,7 +2,7 @@
     "name": "devaks",
     "version": "1.0.0",
     "scripts": {
-        "build": "cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install",
-        "start": "cd backend && npm start"
+        "build": "cd frontend && npm install --include=dev && npm run build",
+        "start": "cd backend && .\\venv\\Scripts\\python -m uvicorn main:app --host 0.0.0.0 --port 8989"
     }
 }
