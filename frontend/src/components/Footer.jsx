@@ -2,9 +2,13 @@ import { useState } from 'react';
 
 const Footer = () => {
     const [showModal, setShowModal] = useState(false);
+    const [showContactModal, setShowContactModal] = useState(false);
     const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+    const [contactForm, setContactForm] = useState({ name: '', address: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
+    const [contactSubmitted, setContactSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [contactLoading, setContactLoading] = useState(false);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -75,6 +79,39 @@ const Footer = () => {
         setForm({ name: '', email: '', phone: '', message: '' });
     };
 
+    const handleContactChange = (e) => {
+        setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+    };
+
+    const handleContactSubmit = async (e) => {
+        e.preventDefault();
+        setContactLoading(true);
+
+        let newTab = null;
+        try {
+            newTab = window.open('about:blank', '_blank');
+        } catch (err) {
+            console.error('Failed to pre-open tab:', err);
+        }
+
+        const msg = `Hello Devaksa!\nName: ${contactForm.name}\nAddress: ${contactForm.address}\nMessage: ${contactForm.message}`;
+        const waUrl = `https://wa.me/916307365754?text=${encodeURIComponent(msg)}`;
+
+        if (newTab) {
+            newTab.location.href = waUrl;
+        } else {
+            window.location.href = waUrl;
+        }
+        setContactSubmitted(true);
+        setContactLoading(false);
+    };
+
+    const closeContactModal = () => {
+        setShowContactModal(false);
+        setContactSubmitted(false);
+        setContactForm({ name: '', address: '', message: '' });
+    };
+
     return (
         <>
             <footer id="contact" className="footer">
@@ -91,9 +128,9 @@ const Footer = () => {
                         <div className="footer-col">
                             <h4>About Devaksa</h4>
                             <ul>
-                                <li><a href="#">Our Story</a></li>
+                                <li><a href="/#about">Our Story</a></li>
                                 <li><a href="#">Sustainability</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowContactModal(true); }}>Contact Us</a></li>
                             </ul>
                         </div>
                         <div className="footer-col">
@@ -122,7 +159,7 @@ const Footer = () => {
                         <p>Copyright © 2026 Devaksa Green Solutions. All rights reserved.</p>
                         <p>India</p>
                         <p className="developer-credit" style={{ marginTop: '5px', fontSize: '13px', opacity: 0.7 }}>
-                            Developer: <a href="mailto:mrprimi91@gmail.com" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Nishant &amp; RaviKaran</a>
+                            Developer: <a href="mailto:nschauhan191@gmail.com" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Nishant Singh Chauhan &amp; RaviKaran Yagik</a>
                             <i className="fa-solid fa-code" style={{ fontSize: '11px', marginLeft: '5px' }}></i>
                         </p>
                     </div>
@@ -229,6 +266,104 @@ const Footer = () => {
                                 </div>
 
                                 <button className="btn-main" onClick={closeModal} style={{ marginTop: '25px', width: 'auto', padding: '10px 24px' }}>
+                                    Close
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Contact Us Modal */}
+            {showContactModal && (
+                <div className="enquiry-overlay" onClick={closeContactModal}>
+                    <div className="enquiry-modal" onClick={(e) => e.stopPropagation()}>
+                        <button className="enquiry-close" onClick={closeContactModal}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+
+                        {!contactSubmitted ? (
+                            <>
+                                <div className="enquiry-header">
+                                    <div className="enquiry-icon">
+                                        <i className="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <h2>Contact Us</h2>
+                                    <p>Fill in your details and we'll get back to you on WhatsApp!</p>
+                                </div>
+                                <form className="enquiry-form" onSubmit={handleContactSubmit}>
+                                    <div className="enquiry-field">
+                                        <label>Your Name *</label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Apna naam likhein..."
+                                            value={contactForm.name}
+                                            onChange={handleContactChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="enquiry-field">
+                                        <label>Address *</label>
+                                        <input
+                                            type="text"
+                                            name="address"
+                                            placeholder="Apna address likhein..."
+                                            value={contactForm.address}
+                                            onChange={handleContactChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="enquiry-field">
+                                        <label>Your Message *</label>
+                                        <textarea
+                                            name="message"
+                                            placeholder="Aapka message..."
+                                            rows={4}
+                                            value={contactForm.message}
+                                            onChange={handleContactChange}
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="enquiry-submit" disabled={contactLoading}>
+                                        {contactLoading ? (
+                                            <span><i className="fa-solid fa-spinner fa-spin"></i> Sending...</span>
+                                        ) : (
+                                            <span><i className="fa-brands fa-whatsapp"></i> Send on WhatsApp</span>
+                                        )}
+                                    </button>
+                                </form>
+                            </>
+                        ) : (
+                            <div className="enquiry-success">
+                                <div className="enquiry-success-icon">
+                                    <i className="fa-solid fa-circle-check"></i>
+                                </div>
+                                <h2>Message Sent!</h2>
+                                <p>Aapki details send ho gayi hain aur WhatsApp chat open ho gayi hai. 🌿</p>
+                                
+                                <div style={{ marginTop: '15px' }}>
+                                    <p style={{ fontSize: '13px', color: '#a1a1a6', marginBottom: '8px' }}>
+                                        Agar WhatsApp page open nahi hua, toh neeche button pe click karein:
+                                    </p>
+                                    <a
+                                        href={`https://wa.me/916307365754?text=${encodeURIComponent(`Hello Devaksa!\nName: ${contactForm.name}\nAddress: ${contactForm.address}\nMessage: ${contactForm.message}`)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="enquiry-submit"
+                                        style={{
+                                            textDecoration: 'none',
+                                            display: 'inline-flex',
+                                            padding: '12px 20px',
+                                            width: 'auto',
+                                            margin: '0 auto'
+                                        }}
+                                    >
+                                        <i className="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                                    </a>
+                                </div>
+
+                                <button className="btn-main" onClick={closeContactModal} style={{ marginTop: '25px', width: 'auto', padding: '10px 24px' }}>
                                     Close
                                 </button>
                             </div>
